@@ -1,4 +1,6 @@
 CREATE TABLE planets(
+    --in real world could ask clients or coworkers what max size string should be
+    --and change to varchar
     name TEXT PRIMARY KEY,
     orbital_period_in_yrs numeric NOT NULL,
     star_name TEXT NOT NULL REFERENCES stars
@@ -7,6 +9,7 @@ CREATE TABLE planets(
 CREATE TABLE stars(
     name TEXT PRIMARY KEY,
     --Assuming VARCHAR(10) based hottest star according online is 210,000K
+    --change type star_temp_in_kelvin to integer
     star_temp_in_kelvin VARCHAR(10) NOT NULL
 );
 
@@ -37,6 +40,7 @@ INSERT INTO moons(name, planet_name)
 
 
 SELECT planets.name, star_name, COUNT(moons.name) as moon_count
+--could alias planets as p
 FROM planets
 LEFT JOIN moons
 ON planets.name = moons.planet_name
